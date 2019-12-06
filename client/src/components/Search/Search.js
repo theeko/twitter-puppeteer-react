@@ -42,7 +42,12 @@ export default function Search() {
     if (!value) return;
     setIsSubmitting(true);
     console.log("handleSearch value", value);
-    fetch("http://localhost:5000/api", {
+    console.log(process.env.NODE_ENV);
+    const url =
+      process.env.NODE_ENV == "production"
+        ? "https://localhost:5000/api"
+        : "http://localhost:5000/api";
+    fetch(url, {
       method: "POST",
       body: JSON.stringify({
         search: value,
