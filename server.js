@@ -10,8 +10,9 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-const publicPathStatic = path.join(__dirname, "client", "build", "static");
+const publicPathStatic = path.join(__dirname, "client", "build");
 const publicPath = path.join(__dirname, "client", "build");
+
 app.use(express.static(publicPathStatic));
 
 app.use("/api", apiRoutes);
