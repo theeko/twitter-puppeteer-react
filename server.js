@@ -10,13 +10,14 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-const publicPath = path.join(__dirname, "client", "public");
-app.use(express.static(publicPath));
+const publicPathStatic = path.join(__dirname, "client", "build", "static");
+const publicPath = path.join(__dirname, "client", "build");
+app.use(express.static(publicPathStatic));
 
 app.use("/api", apiRoutes);
 
 app.get("*", (req, res) => {
-  res.sendFile(publicPath);
+  res.sendFile(path.resolve(publicPath, "index.html"));
 });
 
 app.use(function(err, req, res, next) {
