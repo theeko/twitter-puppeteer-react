@@ -1,0 +1,8 @@
+@media (max-width: 720px) {
+  .img-container {
+    width: 100% !important;
+  }
+  .list-item-main {
+    width: 100% !important;
+  }
+}
