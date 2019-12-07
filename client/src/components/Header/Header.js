@@ -1,12 +1,11 @@
 import React from "react";
 import { Menu, Icon } from "antd";
 import { Link } from "react-router-dom";
-import { useRouteMatch } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 export default function Header() {
-  const match = useRouteMatch();
-  console.log(match);
-  const selected = match.path === "/" ? "home" : match.path;
+  const location = useLocation();
+  const selected = location.pathname === "/" ? "home" : location.pathname;
   return (
     <>
       <Menu
@@ -20,7 +19,7 @@ export default function Header() {
             Home
           </Link>
         </Menu.Item>
-        <Menu.Item key="about" style={{ float: "right" }}>
+        <Menu.Item key="/about" style={{ float: "right" }}>
           <Link to="/about" rel="noopener noreferrer">
             About
           </Link>

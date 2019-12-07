@@ -20,21 +20,22 @@ export default function Search() {
   const [howManyRecords, setHowManyRecords] = React.useState(10);
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [items, setItems] = React.useState({});
-  const searchFieldRef = React.useRef(null);
+  const [search, setSearch] = React.useState("");
 
   React.useEffect(() => {
     console.log("useEffect");
     const eventFunction = e => {
-      console.log("useEffect eventFunciton");
       if (e.key === "Enter") {
-        console.log(searchFieldRef.value);
+        handleSearch(search);
       }
     };
 
-    document.body.addEventListener("keyup", eventFunction);
+    document.addEventListener("keyup", eventFunction);
 
-    return document.body.removeEventListener("keyup", eventFunction);
-  }, []);
+    return () => {
+      document.removeEventListener("keyup", eventFunction);
+    };
+  }, [search]);
 
   const handleSearch = value => {
     console.log(checkedList);
@@ -42,12 +43,10 @@ export default function Search() {
     if (!value) return;
     setIsSubmitting(true);
     console.log("handleSearch value", value);
+    console.log("handleSearch search value", search);
     console.log(process.env.NODE_ENV);
-    const url =
-      process.env.NODE_ENV == "production"
-        ? "https://localhost:5000/api"
-        : "http://localhost:5000/api";
-    fetch(url, {
+
+    fetch("http://localhost:5000/api", {
       method: "POST",
       body: JSON.stringify({
         search: value,
@@ -107,6 +106,10 @@ export default function Search() {
     });
   };
 
+  const handleSearchChange = e => {
+    setSearch(e.target.value);
+  };
+
   return (
     <>
       <Row type="flex" justify="space-around">
@@ -117,7 +120,8 @@ export default function Search() {
             onSearch={handleSearch}
             enterButton
             loading={isSubmitting}
-            ref={searchFieldRef}
+            value={search}
+            onChange={handleSearchChange}
           />
           <div style={{ padding: "20px 0" }}>
             <div style={{ borderBottom: "1px solid #E9E9E9" }}>

@@ -14,6 +14,7 @@ export default function Content() {
 
   const transitions = useTransition(location, location => location.pathname, {
     from: item => {
+      console.log("transition from");
       if (!prevPath)
         return {
           opacity: 0,
@@ -29,15 +30,19 @@ export default function Content() {
       return Object.assign({}, styles, { position: "absolute", width: "100%" });
     },
     enter: () => {
+      console.log("transition enter");
       return { opacity: 1, transform: "translate3d(0,0,0)" };
     },
     leave: item => {
-      let prevPath = item.pathname;
-      // if prevPath index is lower, we should go to left
-      let isLeft = paths.indexOf(prevPath) < paths.indexOf(location.pathname);
+      console.log("transition leave");
+      let previousPath = item.pathname;
+      // if previousPath index is lower, we should go to left
+      let isLeft =
+        paths.indexOf(previousPath) < paths.indexOf(location.pathname);
       const styles = isLeft
         ? { opacity: 0.6, transform: "translate3d(-100%,0,0)" }
         : { opacity: 0.6, transform: "translate3d(100%,0,0)" };
+      console.log("leave styles", styles);
       return styles;
     }
   });
