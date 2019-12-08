@@ -53,11 +53,17 @@ export default function ListComponent({ items, handleArrayChange }) {
 
             {item.imgUrls.length > 0 ? (
               <Col style={{ width: "20%" }} className="img-container" sm={12}>
-                <img
-                  style={{ width: "160px", height: "160px" }}
-                  src={item.imgUrls[0]}
-                  alt={`pic for ${item.username}`}
-                />
+                <a
+                  href={item.imgUrls[0]}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    style={{ width: "100px" }}
+                    src={item.imgUrls[0]}
+                    alt={`pic for ${item.username}`}
+                  />
+                </a>
               </Col>
             ) : null}
           </Row>

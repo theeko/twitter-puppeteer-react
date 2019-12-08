@@ -18,6 +18,7 @@ router.post("/", async (req, res) => {
      * So we Promise.all for effiency
      */
     for (let i = 0; i < search.length; i++) {
+      if (!search[i]) continue;
       promises.push(
         await twitterInstance.scrapeData({
           search: search[i],
