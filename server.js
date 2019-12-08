@@ -10,8 +10,8 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-const publicPathStatic = path.join(__dirname, "client", "build");
-const publicPath = path.join(__dirname, "client", "build");
+const publicPathStatic = path.join(__dirname, "client", "public");
+const publicPath = path.join(__dirname, "client", "public");
 
 app.use(express.static(publicPathStatic));
 
