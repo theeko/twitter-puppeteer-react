@@ -46,7 +46,7 @@ export default function Search() {
     console.log("handleSearch search value", search);
     console.log(process.env.NODE_ENV);
 
-    fetch("http://localhost:5000/api", {
+    fetch("/api", {
       method: "POST",
       body: JSON.stringify({
         search: value,
