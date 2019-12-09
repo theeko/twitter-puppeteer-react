@@ -1,10 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const twitterClass = require("../scrapper/twitterClass");
+const { saveToFile, json2csv } = require("../helpers/json2csv");
+const path = require("path");
 
 router.post("/", async (req, res) => {
   try {
-    let { search, howMany, lastOnes } = req.body;
+    let { search, howMany, lastOnes, saveToCsv } = req.body;
     search = search.split(",").map(s => s.trim());
 
     const twitterInstance = new twitterClass();
@@ -34,7 +36,14 @@ router.post("/", async (req, res) => {
       result = Object.assign(result, value);
     });
 
+    for (let key of Object.keys(result)) {
+      let csv = await json2csv(result[key]);
+      const pathToSave = path.resolve(__dirname, "..", "csv");
+      await saveToFile(csv, `${pathToSave}/${key + "" + Date.now()}.csv`);
+    }
+
     res.json(result);
+
     await twitterInstance.close();
   } catch (e) {
     return res.status(500).send({ error: e.message });

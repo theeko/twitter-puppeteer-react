@@ -23,7 +23,6 @@ export default function Search() {
   const [search, setSearch] = React.useState("");
 
   React.useEffect(() => {
-    console.log("useEffect");
     const eventFunction = e => {
       if (e.key === "Enter") {
         handleSearch(search);

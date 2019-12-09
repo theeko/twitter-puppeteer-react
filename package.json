@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:client": "npm start --prefix client",
+    "client:start": "npm start --prefix client",
     "client:install": "npm install --prefix client",
     "client:build": "npm run build --prefix client",
-    "build": "npm run client:install && npm run start:client",
+    "build": "npm run client:install && npm run client:build",
     "client": "npm start --prefix client",
     "dev": "concurrently  \"nodemon server.js\" \"npm run client\"",
     "start": "node server.js"
@@ -23,9 +23,10 @@
     "antd": "^3.25.3",
     "concurrently": "^5.0.0",
     "cors": "^2.8.5",
+    "csv-parser": "^2.3.2",
     "express": "^4.17.1",
+    "json2csv": "^4.5.4",
     "mysql2": "^2.0.2",
-    "puppeteer": "^2.0.0",
-    "sequelize": "^5.21.2"
+    "puppeteer": "^2.0.0"
   }
 }
