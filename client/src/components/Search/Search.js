@@ -11,7 +11,7 @@ import {
 
 import List from "../List/List";
 
-const plainOptions = ["Latest", "b", "c"];
+const plainOptions = ["Latest", "Save to Csv", "Save to Db"];
 const defaultCheckedList = ["Latest", "b"];
 
 export default function Search() {
@@ -50,7 +50,9 @@ export default function Search() {
       body: JSON.stringify({
         search: value,
         howMany: howManyRecords,
-        lastOnes: checkedList.includes("Latest")
+        lastOnes: checkedList.includes("Latest"),
+        saveToCsv: checkedList.includes("Save to Csv"),
+        saveToDb: checkedList.includes("Save to Db")
       }),
       headers: {
         "Content-Type": "application/json"
