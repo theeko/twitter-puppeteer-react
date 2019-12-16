@@ -16,7 +16,9 @@ class TwitterScrapper {
    * @return {undefined}
    */
   async _build() {
-    this.browser = await puppeteer.launch({ args: ["--no-sandbox"] });
+    this.browser = await puppeteer.launch({
+      args: ["--no-sandbox", "--disable-setuid-sandbox"]
+    });
     this.page = await this.browser.newPage();
 
     await this.page.waitFor(500);
