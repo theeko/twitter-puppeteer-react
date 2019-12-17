@@ -4,9 +4,11 @@ const twitterClass = require("../scrapper/twitterClass");
 const { saveToFile, json2csv } = require("../helpers/json2csv");
 const path = require("path");
 
+const Tweet = require("../db/models/Tweet");
+
 router.post("/", async (req, res) => {
   try {
-    let { search, howMany, lastOnes, saveToCsv } = req.body;
+    let { search, howMany, lastOnes, saveToCsv, saveToDb } = req.body;
     search = search.split(",").map(s => s.trim());
 
     const twitterInstance = new twitterClass();
@@ -36,10 +38,29 @@ router.post("/", async (req, res) => {
       result = Object.assign(result, value);
     });
 
-    for (let key of Object.keys(result)) {
-      let csv = await json2csv(result[key]);
-      const pathToSave = path.resolve(__dirname, "..", "csv");
-      await saveToFile(csv, `${pathToSave}/${key + "" + Date.now()}.csv`);
+    if (saveToCsv) {
+      console.log("save to csv block is running");
+      let keys = Object.keys(result);
+
+      for (let i = 0; i < keys.length; i++) {
+        let csv = await json2csv(result[keys[i]]);
+        const pathToSave = path.resolve(__dirname, "..", "csv");
+        await saveToFile(csv, `${pathToSave}/${keys[i] + "" + Date.now()}.csv`);
+      }
+    }
+
+    if (saveToDb) {
+      console.log("save to db block is running");
+      let keys = Object.keys(result);
+
+      for (let i = 0; i < keys.length; i++) {
+        let tweet = await new Tweet({
+          searchTerm: keys[i],
+          results: result[keys[i]]
+        });
+
+        await tweet.save();
+      }
     }
 
     res.json(result);

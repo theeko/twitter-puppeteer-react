@@ -124,6 +124,10 @@ export default function Search() {
             value={search}
             onChange={handleSearchChange}
           />
+
+          <Typography.Paragraph style={{ padding: 5 }}>
+            e.g.: husky, #dog pug, something else
+          </Typography.Paragraph>
           <div style={{ padding: "20px 0" }}>
             <div style={{ borderBottom: "1px solid #E9E9E9" }}>
               <Checkbox onChange={onCheckAllChange} checked={isCheckedAll}>

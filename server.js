@@ -2,6 +2,9 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 
+// db
+require("./db/mongo");
+
 const apiRoutes = require("./routes/api");
 
 const app = express();

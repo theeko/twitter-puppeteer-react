@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 
-const Search = mongoose.Schema({
+const SearchSchema = mongoose.Schema({
   searchTerm: {
-    type: Stirng,
+    type: String,
     trim: "true",
     required: [true, "Search term is required"],
     validate: {
@@ -18,13 +18,15 @@ const Search = mongoose.Schema({
   },
   results: [
     {
-      username: Stirng,
-      userLink: Stirng,
+      username: String,
+      userLink: String,
       imgUrls: [String],
       likesCount: Number,
       timestamp: Number,
       message: String,
-      avatar: string
+      avatar: String
     }
   ]
 });
+
+module.exports = mongoose.model("Tweet", SearchSchema);
