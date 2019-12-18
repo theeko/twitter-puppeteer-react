@@ -13,7 +13,7 @@ class TwitterScrapper {
   /**
    * initializes browser and page
    *
-   * @return {undefined}
+   * @returns {undefined}
    */
   async _build() {
     this.browser = await puppeteer.launch({
