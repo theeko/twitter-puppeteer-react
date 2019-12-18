@@ -29,6 +29,12 @@ export default function Search() {
       }
     };
 
+    if (localStorage.getItem("twitter-puppeteer-react-search")) {
+      let storedItems = localStorage.getItem("twitter-puppeteer-react-search");
+      storedItems = JSON.parse(storedItems);
+      setItems(storedItems);
+    }
+
     document.addEventListener("keyup", eventFunction);
 
     return () => {
@@ -64,6 +70,11 @@ export default function Search() {
         if (data.error) {
           console.log(data.error);
         } else {
+          localStorage.clear();
+          localStorage.setItem(
+            "twitter-puppeteer-react-search",
+            JSON.stringify(data)
+          );
           setItems(data);
           console.log(`completed in ${start - Date.now()} ms`);
         }

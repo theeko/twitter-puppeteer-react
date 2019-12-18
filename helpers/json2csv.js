@@ -20,11 +20,12 @@ module.exports = {
    * @param {String} data - csv string
    * @param {String} [outputPath] - output path
    */
-  saveToFile(data, outputPath) {
+  saveToFile(data, filename) {
     console.log("saveToFile");
     const pathToSave = path.resolve(__dirname, "..", "csv");
-    console.log("pathToSave", pathToSave);
-    outputPath = outputPath || `${pathToSave}/${Date.now()}.csv`;
+    outputPath = filename
+      ? `${pathToSave}/${filename + "" + Date.now()}.csv`
+      : `${pathToSave}/${Date.now()}.csv`;
     fs.writeFile(outputPath, data, { flag: "a" }, err => {
       if (err) throw err;
       console.log("The file has been saved!");

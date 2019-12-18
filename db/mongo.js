@@ -1,5 +1,13 @@
 const mongoose = require("mongoose");
-mongoose.connect(
-  "mongodb://admin:aaa333@ds239578.mlab.com:39578/twitter-puppeteer-react",
-  { useNewUrlParser: true, useUnifiedTopology: true }
-);
+
+try {
+  const dbUrl = `mongodb://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@ds239578.mlab.com:39578/twitter-puppeteer-react`;
+  mongoose
+    .connect(dbUrl, {
+      useNewUrlParser: true,
+      useUnifiedTopology: false
+    })
+    .catch(e => console.log(e.message));
+} catch (e) {
+  console.log(e.message);
+}

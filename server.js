@@ -2,6 +2,10 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 
+// dotenv
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
 // db
 require("./db/mongo");
 

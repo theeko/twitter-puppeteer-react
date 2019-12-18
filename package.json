@@ -29,5 +29,8 @@
     "mongoose": "^5.8.1",
     "mysql2": "^2.0.2",
     "puppeteer": "^2.0.0"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0"
   }
 }

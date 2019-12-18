@@ -38,28 +38,30 @@ router.post("/", async (req, res) => {
       result = Object.assign(result, value);
     });
 
+    let keys = Object.keys(result);
     if (saveToCsv) {
       console.log("save to csv block is running");
-      let keys = Object.keys(result);
 
       for (let i = 0; i < keys.length; i++) {
-        let csv = await json2csv(result[keys[i]]);
-        const pathToSave = path.resolve(__dirname, "..", "csv");
-        await saveToFile(csv, `${pathToSave}/${keys[i] + "" + Date.now()}.csv`);
+        if (result[keys[i]]) {
+          let csv = await json2csv(result[keys[i]]);
+          await saveToFile(csv, keys[i]);
+        }
       }
     }
 
     if (saveToDb) {
       console.log("save to db block is running");
-      let keys = Object.keys(result);
 
       for (let i = 0; i < keys.length; i++) {
-        let tweet = await new Tweet({
-          searchTerm: keys[i],
-          results: result[keys[i]]
-        });
+        if (result[keys[i]]) {
+          let tweet = new Tweet({
+            searchTerm: keys[i],
+            results: result[keys[i]]
+          });
 
-        await tweet.save();
+          await tweet.save();
+        }
       }
     }
 
