@@ -70,7 +70,7 @@ export default function Search() {
         if (data.error) {
           console.log(data.error);
         } else {
-          localStorage.clear();
+          localStorage.removeItem("twitter-puppeteer-react-search");
           localStorage.setItem(
             "twitter-puppeteer-react-search",
             JSON.stringify(data)

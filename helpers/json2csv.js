@@ -18,7 +18,7 @@ module.exports = {
    * A function that writes data to outputPath
    *
    * @param {String} data - csv string
-   * @param {String} [outputPath] - output path
+   * @param {String} [filename] - output file name: csv/example<timestamp>.csv
    */
   saveToFile(data, filename) {
     console.log("saveToFile");

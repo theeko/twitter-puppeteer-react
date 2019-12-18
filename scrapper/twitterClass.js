@@ -24,6 +24,11 @@ class TwitterScrapper {
     await this.page.waitFor(500);
   }
 
+  /**
+   *
+   * @param {Object} page - puppeteer page instance
+   * @returns {function} - a fuction to cancel page.interception
+   */
   async _setRequestInterception(page) {
     //ignoring stylesheet, images, font, media(media is ignored when using chromium)
     await page.setRequestInterception(true);
