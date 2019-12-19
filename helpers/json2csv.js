@@ -35,7 +35,7 @@ module.exports = {
    * A functino that accepts a json array and returns a promise that resolves to csv version
    *
    * @param {Object[]} jsonArr - Array of object
-   * @returns {Promise} - a promise which will be resolved to csv version of obj
+   * @return {Promise} - a promise which will be resolved to csv version of obj
    */
   json2csv: async function(jsonArr) {
     return parseAsync(jsonArr, opts);

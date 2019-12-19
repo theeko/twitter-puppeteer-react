@@ -13,7 +13,7 @@ class TwitterScrapper {
   /**
    * initializes browser and page
    *
-   * @returns {undefined}
+   * @return {undefined}
    */
   async _build() {
     this.browser = await puppeteer.launch({
@@ -27,7 +27,7 @@ class TwitterScrapper {
   /**
    *
    * @param {Object} page - puppeteer page instance
-   * @returns {function} - a fuction to cancel page.interception
+   * @return {function} - a fuction to cancel page.interception
    */
   async _setRequestInterception(page) {
     //ignoring stylesheet, images, font, media(media is ignored when using chromium)
@@ -66,7 +66,7 @@ class TwitterScrapper {
    * @param {number} [options.howMany] - defaults to 10, how many records to fetch
    * @param {string} options.search - search string
    * @param {boolean} [options.lastOnes] - should we fetch latest records or popular ones
-   * @returns {Object} - returns Object: {key: []}
+   * @return {Object} - returns Object: {key: []}
    */
   async scrapeData({ howMany = 10, search, lastOnes = true } = {}) {
     await this._initIfNeccesarry();
